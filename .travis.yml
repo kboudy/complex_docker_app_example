@@ -1,0 +1,25 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kboudy/react-test -f ./client/Dockerfile.dev ./client
+
+# travis-ci will fail the build if any of these scripts return non-zero exit code
+script:
+  # -- --coverage prevents the tests from going into that interactive keyboard request loop
+  - docker run kboudy/react-test npm test -- --coverage 
+
+after_success:
+  - docker build -t kboudy/multi-client ./client
+  - docker build -t kboudy/multi-nginx ./nginx
+  - docker build -t kboudy/multi-server ./server
+  - docker build -t kboudy/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to Docker hub
+  - docker push kboudy/multi-client
+  - docker push kboudy/multi-nginx
+  - docker push kboudy/multi-server
+  - docker push kboudy/multi-worker
+      
