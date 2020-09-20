@@ -13,3 +13,11 @@
 ## The production config uses two nginx servers - 1 for routing & 1 for serving React's prod files
 
 ![](./readme_images/production_second_nginx_server.png)
+
+## on AWS, we use RDS & Elastic Cache (instead of Postgres & Redis containers)
+
+![](./readme_images/production_architecture.png)
+
+## AWS Configuration cheat sheet
+
+Stephen has a cheat sheet [here](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/21321244#notes) for running through the necessary AWS config steps
