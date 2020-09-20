@@ -1,3 +1,4 @@
+language: generic
 sudo: required
 services:
   - docker
@@ -8,7 +9,7 @@ before_install:
 # travis-ci will fail the build if any of these scripts return non-zero exit code
 script:
   # -- --coverage prevents the tests from going into that interactive keyboard request loop
-  - docker run kboudy/react-test npm test -- --coverage 
+  - docker run -e CI=true kboudy/react-test npm test
 
 after_success:
   - docker build -t kboudy/multi-client ./client
@@ -22,4 +23,3 @@ after_success:
   - docker push kboudy/multi-nginx
   - docker push kboudy/multi-server
   - docker push kboudy/multi-worker
-      
