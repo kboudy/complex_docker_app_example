@@ -8,3 +8,8 @@
 
 ![](./readme_images/architecture.png)
 ![](./readme_images/nginx_routes.png)
+![](./readme_images/multi_container_setup.png)
+
+## The production config uses two nginx servers - 1 for routing & 1 for serving React's prod files
+
+![](./readme_images/production_second_nginx_server.png)
